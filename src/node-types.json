@@ -216,6 +216,10 @@
           "named": true
         },
         {
+          "type": "comment",
+          "named": true
+        },
+        {
           "type": "session",
           "named": true
         }

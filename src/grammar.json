@@ -28,29 +28,8 @@
             "name": "override_entry"
           },
           {
-            "type": "SEQ",
-            "members": [
-              {
-                "type": "CHOICE",
-                "members": [
-                  {
-                    "type": "SYMBOL",
-                    "name": "_spaces"
-                  },
-                  {
-                    "type": "BLANK"
-                  }
-                ]
-              },
-              {
-                "type": "SYMBOL",
-                "name": "comment"
-              },
-              {
-                "type": "SYMBOL",
-                "name": "_eol"
-              }
-            ]
+            "type": "SYMBOL",
+            "name": "_comment_line"
           },
           {
             "type": "SYMBOL",
@@ -80,6 +59,10 @@
                 },
                 {
                   "type": "SYMBOL",
+                  "name": "_comment_line"
+                },
+                {
+                  "type": "SYMBOL",
                   "name": "session"
                 }
               ]
@@ -99,6 +82,31 @@
           }
         ]
       }
+    },
+    "_comment_line": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_spaces"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "comment"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_eol"
+        }
+      ]
     },
     "clock_in_entry": {
       "type": "SEQ",

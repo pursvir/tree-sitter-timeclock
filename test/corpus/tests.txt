@@ -142,7 +142,7 @@ Nested sessions, timezones, milliseconds
 i 2026-04-04 09:00:04+0100 Car repair
 i 2026-04-04 09:10:30 Reading  Some cool audiobook
 o 2026-04-04 09:45:29
-o 2026-04-04 13:50:09+0100 Car repair
+o 2026-04-04 13:50+0100 Car repair
 
 ---
 

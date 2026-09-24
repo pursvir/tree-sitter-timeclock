@@ -17,17 +17,19 @@ export default grammar({
       $.break_entry,
       $.holiday_entry,
       $.override_entry,
-      seq(optional($._spaces), $.comment, $._eol),
+      $._comment_line,
       $._blank,
     )),
 
     session: $ => prec.right(1, seq(
       $.clock_in_entry,
-      repeat(choice($._blank, $.session)),
+      repeat(choice($._blank, $._comment_line, $.session)),
       // Nested incompleted sessions are allowed.
       optional($.clock_out_entry),
     )),
 
+    _comment_line: $ => seq(optional($._spaces), $.comment, $._eol),
+    
     // TODO: tags support
     clock_in_entry: $ => seq(
       $.clock_in_marker, $._entry_body, $._eol,
