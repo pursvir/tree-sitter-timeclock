@@ -1,0 +1,173 @@
+========================================================================
+Single clock-in
+========================================================================
+i 2026-05-05 08:00 Job
+
+---
+
+(source_file
+  (session
+    (clock_in_entry
+      (clock_in_marker)
+      (simple_date)
+      (time)
+      (account))))
+
+========================================================================
+One clock-in - clock-out pair
+========================================================================
+i 2026-01-01 01:30 Drinking
+o 2026-01-01 12:00
+
+---
+
+(source_file
+  (session
+    (clock_in_entry
+      (clock_in_marker)
+      (simple_date)
+      (time)
+      (account))
+    (clock_out_entry
+      (clock_out_marker)
+      (simple_date)
+      (time))))
+
+========================================================================
+Session where there are milliseconds in timestamps
+========================================================================
+i 2026-06-12 20:30:09 Breathing exercise
+o 2026-06-12 20:40:49
+
+---
+
+(source_file
+  (session
+    (clock_in_entry
+      (clock_in_marker)
+      (simple_date)
+      (time)
+      (account))
+    (clock_out_entry
+      (clock_out_marker)
+      (simple_date)
+      (time))))
+
+========================================================================
+Session where there are timezone shifts in timestamps
+========================================================================
+i 2026-07-31 01:30:09 Flying to Beijing
+o 2026-07-31 06:30:49+0300
+
+---
+
+(source_file
+  (session
+    (clock_in_entry
+      (clock_in_marker)
+      (simple_date)
+      (time)
+      (account))
+    (clock_out_entry
+      (clock_out_marker)
+      (simple_date)
+      (time)
+      (tz_offset))))
+
+========================================================================
+Single comment
+========================================================================
+; This is a simple comment.
+
+---
+
+(source_file
+  (comment))
+
+========================================================================
+Comment with comment pattern
+========================================================================
+; This is a simple comment. ; hehe
+
+---
+
+(source_file
+  (comment))
+
+========================================================================
+Session with description
+========================================================================
+i 2026-03-01 08:00 Sports  I ran 3 kms. Yay ⸜(oˊᗜˋo)⸝
+o 2026-03-01 09:10
+
+---
+
+(source_file
+  (session
+    (clock_in_entry
+      (clock_in_marker)
+      (simple_date)
+      (time)
+      (account)
+      (description))
+    (clock_out_entry
+      (clock_out_marker)
+      (simple_date)
+      (time))))
+
+========================================================================
+Session with description, which is more than two spaces after account
+========================================================================
+i 2026-03-01 08:00 Sports   I ran 3 kms. Yay ⸜(oˊᗜˋo)⸝
+o 2026-03-01 09:10
+
+---
+
+(source_file
+  (session
+    (clock_in_entry
+      (clock_in_marker)
+      (simple_date)
+      (time)
+      (account)
+      (description))
+    (clock_out_entry
+      (clock_out_marker)
+      (simple_date)
+      (time))))
+
+======================================================
+Nested sessions, timezones, milliseconds
+======================================================
+i 2026-04-04 09:00:04+0100 Car repair
+i 2026-04-04 09:10:30 Reading  Some cool audiobook
+o 2026-04-04 09:45:29
+o 2026-04-04 13:50:09+0100 Car repair
+
+---
+
+(source_file
+  (session
+    (clock_in_entry
+      (clock_in_marker)
+      (simple_date)
+      (time)
+      (tz_offset)
+      (account))
+    (session
+       (clock_in_entry
+         (clock_in_marker)
+         (simple_date)
+         (time)
+         (account)
+         (description))
+       (clock_out_entry
+         (clock_out_marker)
+         (simple_date)
+         (time)))
+    (clock_out_entry
+      (clock_out_marker)
+      (simple_date)
+      (time)
+      (tz_offset)
+      (account))))

@@ -1,0 +1,306 @@
+[
+  {
+    "type": "account",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "break_entry",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "account",
+          "named": true
+        },
+        {
+          "type": "break_marker",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "description",
+          "named": true
+        },
+        {
+          "type": "simple_date",
+          "named": true
+        },
+        {
+          "type": "time",
+          "named": true
+        },
+        {
+          "type": "tz_offset",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "clock_in_entry",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "account",
+          "named": true
+        },
+        {
+          "type": "clock_in_marker",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "description",
+          "named": true
+        },
+        {
+          "type": "simple_date",
+          "named": true
+        },
+        {
+          "type": "time",
+          "named": true
+        },
+        {
+          "type": "tz_offset",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "clock_out_entry",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "account",
+          "named": true
+        },
+        {
+          "type": "clock_out_marker",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "description",
+          "named": true
+        },
+        {
+          "type": "simple_date",
+          "named": true
+        },
+        {
+          "type": "time",
+          "named": true
+        },
+        {
+          "type": "tz_offset",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "holiday_entry",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "account",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "description",
+          "named": true
+        },
+        {
+          "type": "holiday_marker",
+          "named": true
+        },
+        {
+          "type": "simple_date",
+          "named": true
+        },
+        {
+          "type": "time",
+          "named": true
+        },
+        {
+          "type": "tz_offset",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "override_entry",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "account",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "description",
+          "named": true
+        },
+        {
+          "type": "override_marker",
+          "named": true
+        },
+        {
+          "type": "simple_date",
+          "named": true
+        },
+        {
+          "type": "time",
+          "named": true
+        },
+        {
+          "type": "tz_offset",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "session",
+    "named": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": true,
+      "types": [
+        {
+          "type": "clock_in_entry",
+          "named": true
+        },
+        {
+          "type": "clock_out_entry",
+          "named": true
+        },
+        {
+          "type": "session",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": "simple_date",
+    "named": true,
+    "fields": {}
+  },
+  {
+    "type": "source_file",
+    "named": true,
+    "root": true,
+    "fields": {},
+    "children": {
+      "multiple": true,
+      "required": false,
+      "types": [
+        {
+          "type": "break_entry",
+          "named": true
+        },
+        {
+          "type": "clock_in_entry",
+          "named": true
+        },
+        {
+          "type": "comment",
+          "named": true
+        },
+        {
+          "type": "holiday_entry",
+          "named": true
+        },
+        {
+          "type": "override_entry",
+          "named": true
+        },
+        {
+          "type": "session",
+          "named": true
+        }
+      ]
+    }
+  },
+  {
+    "type": " ",
+    "named": false
+  },
+  {
+    "type": "break_marker",
+    "named": true
+  },
+  {
+    "type": "clock_in_marker",
+    "named": true
+  },
+  {
+    "type": "clock_out_marker",
+    "named": true
+  },
+  {
+    "type": "comment",
+    "named": true
+  },
+  {
+    "type": "description",
+    "named": true
+  },
+  {
+    "type": "holiday_marker",
+    "named": true
+  },
+  {
+    "type": "override_marker",
+    "named": true
+  },
+  {
+    "type": "time",
+    "named": true
+  },
+  {
+    "type": "tz_offset",
+    "named": true
+  }
+]

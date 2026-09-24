@@ -1,0 +1,454 @@
+{
+  "$schema": "https://tree-sitter.github.io/tree-sitter/assets/schemas/grammar.schema.json",
+  "name": "timeclock",
+  "rules": {
+    "source_file": {
+      "type": "REPEAT",
+      "content": {
+        "type": "CHOICE",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "session"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "clock_in_entry"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "break_entry"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "holiday_entry"
+          },
+          {
+            "type": "SYMBOL",
+            "name": "override_entry"
+          },
+          {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_spaces"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
+                "type": "SYMBOL",
+                "name": "comment"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "_eol"
+              }
+            ]
+          },
+          {
+            "type": "SYMBOL",
+            "name": "_blank"
+          }
+        ]
+      }
+    },
+    "session": {
+      "type": "PREC_RIGHT",
+      "value": 1,
+      "content": {
+        "type": "SEQ",
+        "members": [
+          {
+            "type": "SYMBOL",
+            "name": "clock_in_entry"
+          },
+          {
+            "type": "REPEAT",
+            "content": {
+              "type": "CHOICE",
+              "members": [
+                {
+                  "type": "SYMBOL",
+                  "name": "_blank"
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "session"
+                }
+              ]
+            }
+          },
+          {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "clock_out_entry"
+              },
+              {
+                "type": "BLANK"
+              }
+            ]
+          }
+        ]
+      }
+    },
+    "clock_in_entry": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "clock_in_marker"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_entry_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_eol"
+        }
+      ]
+    },
+    "clock_out_entry": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "clock_out_marker"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_entry_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_eol"
+        }
+      ]
+    },
+    "break_entry": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "break_marker"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_entry_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_eol"
+        }
+      ]
+    },
+    "holiday_entry": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "holiday_marker"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_entry_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_eol"
+        }
+      ]
+    },
+    "override_entry": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "override_marker"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_entry_body"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_eol"
+        }
+      ]
+    },
+    "_entry_body": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "STRING",
+          "value": " "
+        },
+        {
+          "type": "SYMBOL",
+          "name": "simple_date"
+        },
+        {
+          "type": "STRING",
+          "value": " "
+        },
+        {
+          "type": "SYMBOL",
+          "name": "time"
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "tz_offset"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SEQ",
+              "members": [
+                {
+                  "type": "STRING",
+                  "value": " "
+                },
+                {
+                  "type": "SYMBOL",
+                  "name": "_entry_suffix"
+                }
+              ]
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        }
+      ]
+    },
+    "_entry_suffix": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PREC",
+          "value": 2,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "account"
+              },
+              {
+                "type": "PATTERN",
+                "value": "[ ]{2,}"
+              },
+              {
+                "type": "SYMBOL",
+                "name": "description"
+              },
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SEQ",
+                    "members": [
+                      {
+                        "type": "CHOICE",
+                        "members": [
+                          {
+                            "type": "SYMBOL",
+                            "name": "_spaces"
+                          },
+                          {
+                            "type": "BLANK"
+                          }
+                        ]
+                      },
+                      {
+                        "type": "SYMBOL",
+                        "name": "comment"
+                      }
+                    ]
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              }
+            ]
+          }
+        },
+        {
+          "type": "PREC",
+          "value": 1,
+          "content": {
+            "type": "SEQ",
+            "members": [
+              {
+                "type": "CHOICE",
+                "members": [
+                  {
+                    "type": "SYMBOL",
+                    "name": "_spaces"
+                  },
+                  {
+                    "type": "BLANK"
+                  }
+                ]
+              },
+              {
+                "type": "SYMBOL",
+                "name": "comment"
+              }
+            ]
+          }
+        },
+        {
+          "type": "SYMBOL",
+          "name": "account"
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_spaces"
+        }
+      ]
+    },
+    "clock_in_marker": {
+      "type": "STRING",
+      "value": "i"
+    },
+    "clock_out_marker": {
+      "type": "STRING",
+      "value": "o"
+    },
+    "break_marker": {
+      "type": "STRING",
+      "value": "b"
+    },
+    "holiday_marker": {
+      "type": "STRING",
+      "value": "h"
+    },
+    "override_marker": {
+      "type": "STRING",
+      "value": "O"
+    },
+    "simple_date": {
+      "type": "CHOICE",
+      "members": [
+        {
+          "type": "PATTERN",
+          "value": "[1-9]\\d{3}-\\d{2}-\\d{2}"
+        },
+        {
+          "type": "PATTERN",
+          "value": "[1-9]\\d{3}\\/\\d{2}\\/\\d{2}"
+        }
+      ]
+    },
+    "time": {
+      "type": "PATTERN",
+      "value": "(?:[0-1]\\d|2[0-3])\\:[0-5]\\d(?:\\:[0-5]\\d)?"
+    },
+    "tz_offset": {
+      "type": "PATTERN",
+      "value": "[+-](?:[0-1]\\d|2[0-3])[0-5]\\d"
+    },
+    "account": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "SYMBOL",
+          "name": "_account_char"
+        },
+        {
+          "type": "REPEAT",
+          "content": {
+            "type": "CHOICE",
+            "members": [
+              {
+                "type": "SYMBOL",
+                "name": "_account_char"
+              },
+              {
+                "type": "SEQ",
+                "members": [
+                  {
+                    "type": "STRING",
+                    "value": " "
+                  },
+                  {
+                    "type": "SYMBOL",
+                    "name": "_account_char"
+                  }
+                ]
+              }
+            ]
+          }
+        }
+      ]
+    },
+    "_account_char": {
+      "type": "PATTERN",
+      "value": "[^#;* \\t\\r\\n]"
+    },
+    "description": {
+      "type": "PATTERN",
+      "value": "[^#;*\\r\\n]+"
+    },
+    "comment": {
+      "type": "PATTERN",
+      "value": "[#;*][^\\r\\n]*"
+    },
+    "_blank": {
+      "type": "SEQ",
+      "members": [
+        {
+          "type": "CHOICE",
+          "members": [
+            {
+              "type": "SYMBOL",
+              "name": "_spaces"
+            },
+            {
+              "type": "BLANK"
+            }
+          ]
+        },
+        {
+          "type": "SYMBOL",
+          "name": "_eol"
+        }
+      ]
+    },
+    "_spaces": {
+      "type": "PATTERN",
+      "value": "[ \\t]+"
+    },
+    "_eol": {
+      "type": "PATTERN",
+      "value": "\\r?\\n"
+    }
+  },
+  "extras": [],
+  "conflicts": [],
+  "precedences": [],
+  "externals": [],
+  "inline": [],
+  "supertypes": [],
+  "reserved": {}
+}
